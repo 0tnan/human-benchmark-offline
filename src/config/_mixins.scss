@@ -1,0 +1,88 @@
+@mixin Toggle {
+  & {
+    display: none;
+  }
+  
+  &,
+  &:after,
+  &:before,
+  & *,
+  & *:after,
+  & *:before,
+  & + &--btn {
+    box-sizing: border-box;
+  }
+
+  &::-moz-selection,
+  &:after::-moz-selection,
+  &:before::-moz-selection,
+  & *::-moz-selection,
+  & *:after::-moz-selection,
+  & *:before::-moz-selection,
+  & + &--btn::-moz-selection {
+    background: none;
+  }
+
+  &::selection,
+  &:after::selection,
+  &:before::selection,
+  & *::selection,
+  & *:after::selection,
+  & *:before::selection,
+  & + &--btn::selection {
+    background: none;
+  }
+
+  & + &--btn {
+    outline: 0;
+    display: block;
+    width: 4em;
+    height: 2em;
+    position: relative;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  & + &--btn:after,
+  & + &--btn:before {
+    position: relative;
+    display: block;
+    content: "";
+    width: 50%;
+    height: 100%;
+  }
+
+  & + &--btn:after {
+    left: 0;
+  }
+
+  & + &--btn:before {
+    display: none;
+  }
+
+  &:checked + &--btn:after {
+    left: 50%;
+  }
+
+  &--light + &--btn {
+    background: #f0f0f0;
+    border-radius: 2em;
+    padding: 2px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+  }
+
+  &--light + &--btn:after {
+    border-radius: 50%;
+    background: $white;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+  }
+
+  &--light:checked + &--btn {
+    background: $color-tertiary;
+  }
+}

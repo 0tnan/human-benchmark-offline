@@ -1,4 +1,4 @@
-# memory-test
+# human-benchmark-offline
 
 ## Project setup
 ```

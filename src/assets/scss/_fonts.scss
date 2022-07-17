@@ -1,0 +1,33 @@
+@import "exports";
+
+@font-face {
+  font-family: $lexand;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("@/assets/fonts/LexendDeca-Medium.ttf");
+}
+
+@font-face {
+  font-family: $lexand;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("@/assets/fonts/LexendDeca-Light.ttf");
+}
+
+@font-face {
+  font-family: $lexand;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("@/assets/fonts/LexendDeca-Bold.ttf");
+}
+
+@font-face {
+  font-family: $lexand;
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url("@/assets/fonts/LexendDeca-Black.ttf");
+}

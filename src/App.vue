@@ -1,32 +1,45 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view />
+  <div id="app" class="App" :class="getDarkMode ? 'App--dark' : ''">
+    <transition mode="out-in" name="fade">
+      <router-view />
+    </transition>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script lang="ts">
+import Vue from "vue";
+import store from "@/store";
+import { mapGetters } from "vuex";
+export default Vue.extend({
+  computed: {
+    ...mapGetters(["getDarkMode"]),
+  },
+  beforeMount() {
+    let state = localStorage.getItem("human-benchmark-state");
+    if (state) {
+      let stateObject = JSON.parse(state);
+      store.commit("setMode", stateObject.isDarkMode);
+      store.commit("setScore", stateObject.highscore);
+      store.commit("setPseudo", stateObject.pseudo);
     }
+  },
+});
+</script>
+
+<style lang="scss">
+@import "@/assets/scss/main";
+
+.App {
+  box-sizing: border-box;
+  height: 100%;
+  font-family: $font-primary;
+  padding: 2.5rem;
+  color: $black;
+  transition: all 0.5s ease-in-out;
+
+  &--dark {
+    background-color: $darkMode;
+    color: $white;
   }
 }
 </style>
