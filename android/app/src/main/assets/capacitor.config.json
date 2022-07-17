@@ -1,0 +1,6 @@
+{
+	"appId": "com.humanBenchmark.app",
+	"appName": "HumanBenchmark",
+	"webDir": "dist",
+	"bundledWebRuntime": false
+}

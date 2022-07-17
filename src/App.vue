@@ -10,11 +10,22 @@
 import Vue from "vue";
 import store from "@/store";
 import { mapGetters } from "vuex";
+import { App } from "@capacitor/app";
+
 export default Vue.extend({
   computed: {
     ...mapGetters(["getDarkMode"]),
+    currentRoute() {
+      return this.$route.name;
+    },
   },
   beforeMount() {
+    App.addListener("backButton", () => {
+      if (this.currentRoute === "home") {
+        App.exitApp();
+      }
+      window.history.back();
+    });
     let state = localStorage.getItem("human-benchmark-state");
     if (state) {
       let stateObject = JSON.parse(state);
