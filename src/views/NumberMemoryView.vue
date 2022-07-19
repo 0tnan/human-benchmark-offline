@@ -159,17 +159,17 @@ export default Vue.extend({
 
 <style lang="scss">
 .NumberMemory {
-  height: 100%;
   width: 100%;
 
   &-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    height: 100%;
     width: 100%;
     position: relative;
 
     &--retry {
+      margin-top: 15rem;
       flex-direction: column;
       justify-content: center;
     }
@@ -177,8 +177,7 @@ export default Vue.extend({
 
   &-number,
   &-guessTitle {
-    position: absolute;
-    top: 20%;
+    margin-top: 15rem;
     font-size: 5rem;
     display: flex;
     justify-content: center;
@@ -186,10 +185,7 @@ export default Vue.extend({
   }
 
   &-loader {
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 3.5rem;
     height: 1rem;
     background: $black;
     border: 0.1rem solid $black;
@@ -207,9 +203,10 @@ export default Vue.extend({
 
   &-guess {
     &Validator {
-      position: absolute;
+      margin-top: 5rem;
       display: flex;
       flex-direction: column;
+      width: 100%;
     }
 
     &Number {

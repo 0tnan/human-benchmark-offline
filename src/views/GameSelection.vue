@@ -44,7 +44,7 @@ export default Vue.extend({
   }
 
   &-content {
-    margin-top: 50%;
+    margin-top: 15vh;
   }
 
   &-container {
