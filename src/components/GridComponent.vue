@@ -155,7 +155,10 @@ export default Vue.extend({
             });
           }, CELL_GLOW_DELAY);
           this.currentScore++;
-          store.commit("setScore", this.currentScore);
+          store.commit("setScore", {
+            type: "sequenceMemoryScore",
+            value: this.currentScore,
+          });
           this.success = true;
           setTimeout(() => {
             this.success = false;

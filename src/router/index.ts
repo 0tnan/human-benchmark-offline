@@ -20,22 +20,46 @@ const routes: Array<RouteConfig> = [
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
-    path: "/game",
-    name: "game",
+    path: "/game-selection",
+    name: "game-selection",
     // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
+    // this generates a separate chunk (game-selection.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/GameView.vue"),
+      import(
+        /* webpackChunkName: "game-selection" */ "../views/GameSelection.vue"
+      ),
+  },
+  {
+    path: "/sequence-memory",
+    name: "sequence-memory",
+    // route level code-splitting
+    // this generates a separate chunk (sequence-memory.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "sequence-memory" */ "../views/SequenceMemoryView.vue"
+      ),
+  },
+  {
+    path: "/number-memory",
+    name: "number-memory",
+    // route level code-splitting
+    // this generates a separate chunk (number-memory.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "number-memory" */ "../views/NumberMemoryView.vue"
+      ),
   },
   {
     path: "/settings",
     name: "settings",
     // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
+    // this generates a separate chunk (settings.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/SettingsView.vue"),
+      import(/* webpackChunkName: "settings" */ "../views/SettingsView.vue"),
   },
 ];
 

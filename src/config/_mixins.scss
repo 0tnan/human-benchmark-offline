@@ -86,3 +86,50 @@
     background: $color-tertiary;
   }
 }
+
+@mixin input {
+  background: none;
+  padding: 0;
+  border: none;
+  height: 5rem;
+  font-size: 5vh;
+  font-family: $font-primary;
+  width: 100%;
+  color: $black;
+  border-bottom: 0.1rem solid $black;
+
+  &--dark {
+    color: $white;
+    border-bottom: 0.1rem solid $white;
+  }
+}
+
+@mixin button {
+  $block: &;
+
+  color: $white;
+  margin-top: 2.5rem;
+  align-self: center;
+  height: 5.5rem;
+  padding: 1.5rem;
+  border-radius: 5rem;
+  width: 55vw;
+  background: $black;
+  font-size: $xl;
+  border: 0.1rem solid $black;
+
+  &--dark {
+    color: $black;
+    background: $white;
+    border: 0.1rem solid $white;
+  }
+
+  &--noBg {
+    background: none;
+    color: $black;
+
+    &#{$block}--dark {
+      color: $white;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 <template>
-  <div class="Game">
+  <div class="SequenceMemory">
     <grid-component />
   </div>
 </template>
@@ -16,7 +16,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.Game {
+.SequenceMemory {
   display: flex;
   align-items: center;
   height: 100%;

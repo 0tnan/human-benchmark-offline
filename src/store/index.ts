@@ -6,8 +6,23 @@ Vue.use(Vuex);
 
 interface State {
   isDarkMode: boolean;
-  highscore: number;
+  highscore: Highscore;
   pseudo: string;
+}
+
+interface Highscore {
+  sequenceMemoryScore: number;
+  numberMemoryScore: number;
+}
+
+enum HighscoreLabels {
+  sequenceMemoryScore = "sequenceMemoryScore",
+  numberMemoryScore = "numberMemoryScore",
+}
+
+interface HighScorePayload {
+  type: HighscoreLabels;
+  value: number;
 }
 
 const UUID = uuid.v1();
@@ -16,7 +31,10 @@ export default new Vuex.Store({
   state() {
     return {
       isDarkMode: false,
-      highscore: 0,
+      highscore: {
+        sequenceMemoryScore: 0,
+        numberMemoryScore: 0,
+      } as Highscore,
       pseudo: UUID,
     };
   },
@@ -36,9 +54,9 @@ export default new Vuex.Store({
       state.isDarkMode = value;
       localStorage.setItem("human-benchmark-state", JSON.stringify(state));
     },
-    setScore(state: State, value: number) {
-      if (value > state.highscore) {
-        state.highscore = value;
+    setScore(state: State, payload: HighScorePayload) {
+      if (payload.value > state.highscore[payload.type]) {
+        state.highscore[payload.type] = payload.value;
         localStorage.setItem("human-benchmark-state", JSON.stringify(state));
       }
     },

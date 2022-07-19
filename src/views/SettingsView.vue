@@ -12,9 +12,19 @@
         />
         <label class="Settings-toggle--btn" for="cb1"></label>
       </li>
-      <li class="Settings-item">
+      <li class="Settings-item Settings-item--score">
         <label>HighScore</label>
-        <label>{{ getHighscore }}</label>
+        <ul class="Settings-scoreContainer">
+          <li
+            v-for="(score, label) in getHighscore"
+            :key="score"
+            class="Settings-scoreItem"
+            :class="getDarkMode ? 'Settings-scoreItem--dark' : ''"
+          >
+            <label>{{ label }}</label>
+            <label>{{ score }}</label>
+          </li>
+        </ul>
       </li>
       <li class="Settings-item">
         <label>Pseudo</label>
@@ -34,6 +44,7 @@
 import store from "@/store";
 import Vue from "vue";
 import { mapGetters } from "vuex";
+
 export default Vue.extend({
   computed: {
     ...mapGetters(["getDarkMode", "getHighscore", "getPseudo"]),
@@ -42,11 +53,16 @@ export default Vue.extend({
     return {
       value: false,
       pseudo: "",
+      scoreLabels: [] as string[],
     };
   },
   mounted() {
     this.value = this.getDarkMode;
     this.pseudo = this.getPseudo;
+    let scores = Object.entries(this.getHighscore);
+    scores.forEach((score) => {
+      this.scoreLabels.push(score[0]);
+    });
   },
   methods: {
     handleChange(): void {
@@ -81,6 +97,11 @@ export default Vue.extend({
     align-items: center;
     justify-content: space-between;
     margin-bottom: 1.5rem;
+
+    &--score {
+      align-items: flex-start;
+      flex-direction: column;
+    }
   }
 
   &-pseudo {
@@ -102,6 +123,41 @@ export default Vue.extend({
 
     &--dark {
       color: $white;
+    }
+  }
+
+  &-score {
+    &Container {
+      padding-left: 1.5rem;
+      margin-top: 1.5rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    &Item {
+      width: 100%;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: -1.5rem;
+        transform: translateY(-50%);
+        height: 1rem;
+        width: 1rem;
+        background: $black;
+        border-radius: 50%;
+      }
+
+      &--dark {
+        &::before {
+          background: $white;
+        }
+      }
     }
   }
 }

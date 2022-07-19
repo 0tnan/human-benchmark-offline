@@ -23,14 +23,24 @@ export default Vue.extend({
     App.addListener("backButton", () => {
       if (this.currentRoute === "home") {
         App.exitApp();
+      } else if (
+        this.currentRoute === "game-selection" ||
+        this.currentRoute === "settings" ||
+        this.currentRoute === "about"
+      ) {
+        this.$router.push({ name: "home" });
+      } else {
+        this.$router.push({ name: "game-selection" });
       }
-      window.history.back();
     });
     let state = localStorage.getItem("human-benchmark-state");
     if (state) {
       let stateObject = JSON.parse(state);
       store.commit("setMode", stateObject.isDarkMode);
-      store.commit("setScore", stateObject.highscore);
+      let scores = Object.entries(stateObject.highscore);
+      scores.forEach((score) => {
+        store.commit("setScore", { type: score[0], value: score[1] });
+      });
       store.commit("setPseudo", stateObject.pseudo);
     }
   },

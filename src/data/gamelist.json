@@ -1,0 +1,12 @@
+{
+  "games": [
+    {
+      "name": "Sequence Memory",
+      "route": "/sequence-memory"
+    },
+    {
+      "name": "Number Memory",
+      "route": "/number-memory"
+    }
+  ]
+}

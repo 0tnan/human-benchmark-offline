@@ -1,10 +1,10 @@
 <template>
   <div class="Home" :class="{ 'Home--mounted': isMounted }">
-    <h1 class="Home-title">Human Benchmark v1.0.0</h1>
+    <h1 class="Home-title">Human Benchmark</h1>
     <div class="Home-content">
       <ul class="Home-container">
         <li class="Home-route">
-          <router-link to="/game" tag="button">New Game</router-link>
+          <router-link to="/game-selection" tag="button">New Game</router-link>
         </li>
         <li class="Home-route">
           <router-link to="/settings" tag="button">Settings</router-link>
