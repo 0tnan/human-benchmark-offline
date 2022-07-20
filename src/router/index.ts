@@ -53,6 +53,17 @@ const routes: Array<RouteConfig> = [
       ),
   },
   {
+    path: "/reaction-time",
+    name: "reaction-time",
+    // route level code-splitting
+    // this generates a separate chunk (reaction-time.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(
+        /* webpackChunkName: "reaction-time" */ "../views/ReactionTimeView.vue"
+      ),
+  },
+  {
     path: "/settings",
     name: "settings",
     // route level code-splitting

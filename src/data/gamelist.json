@@ -7,6 +7,10 @@
     {
       "name": "Number Memory",
       "route": "/number-memory"
+    },
+    {
+      "name": "Reaction Time",
+      "route": "/reaction-time"
     }
   ]
 }

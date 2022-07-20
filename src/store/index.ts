@@ -13,16 +13,18 @@ interface State {
 interface Highscore {
   sequenceMemoryScore: number;
   numberMemoryScore: number;
+  reactionTimeScore: string;
 }
 
 enum HighscoreLabels {
   sequenceMemoryScore = "sequenceMemoryScore",
   numberMemoryScore = "numberMemoryScore",
+  reactionTimeScore = "reactionTimeScore",
 }
 
 interface HighScorePayload {
   type: HighscoreLabels;
-  value: number;
+  value: number | string;
 }
 
 const UUID = uuid.v1();
@@ -34,6 +36,7 @@ export default new Vuex.Store({
       highscore: {
         sequenceMemoryScore: 0,
         numberMemoryScore: 0,
+        reactionTimeScore: "",
       } as Highscore,
       pseudo: UUID,
     };
@@ -55,9 +58,37 @@ export default new Vuex.Store({
       localStorage.setItem("human-benchmark-state", JSON.stringify(state));
     },
     setScore(state: State, payload: HighScorePayload) {
-      if (payload.value > state.highscore[payload.type]) {
-        state.highscore[payload.type] = payload.value;
-        localStorage.setItem("human-benchmark-state", JSON.stringify(state));
+      if (payload.type != HighscoreLabels.reactionTimeScore) {
+        if (
+          payload.value > state.highscore[payload.type] &&
+          typeof payload.value === "number"
+        ) {
+          state.highscore[payload.type] = payload.value;
+          localStorage.setItem("human-benchmark-state", JSON.stringify(state));
+        }
+      } else if (payload.type === HighscoreLabels.reactionTimeScore) {
+        if (typeof payload.value === "string") {
+          const currentScore = state.highscore[payload.type].replace("ms", "");
+          const payloadScore = payload.value.replace("ms", "");
+          const currentScoreNumber = parseInt(currentScore, 10);
+          const payloadScoreNumber = parseInt(payloadScore, 10);
+          if (
+            payloadScoreNumber < currentScoreNumber &&
+            state.highscore[payload.type] !== ""
+          ) {
+            state.highscore[payload.type] = payload.value;
+            localStorage.setItem(
+              "human-benchmark-state",
+              JSON.stringify(state)
+            );
+          } else if (state.highscore[payload.type] === "") {
+            state.highscore[payload.type] = payload.value;
+            localStorage.setItem(
+              "human-benchmark-state",
+              JSON.stringify(state)
+            );
+          }
+        }
       }
     },
     setPseudo(state: State, value: string) {

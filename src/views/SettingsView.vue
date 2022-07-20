@@ -21,7 +21,7 @@
             class="Settings-scoreItem"
             :class="getDarkMode ? 'Settings-scoreItem--dark' : ''"
           >
-            <label>{{ label }}</label>
+            <label>{{ label | formatScore }}</label>
             <label>{{ score }}</label>
           </li>
         </ul>
@@ -44,6 +44,7 @@
 import store from "@/store";
 import Vue from "vue";
 import { mapGetters } from "vuex";
+import "@/filters";
 
 export default Vue.extend({
   computed: {

@@ -1,7 +1,14 @@
 <template>
-  <div id="app" class="App" :class="getDarkMode ? 'App--dark' : ''">
+  <div
+    id="app"
+    class="App"
+    :class="[
+      getDarkMode ? 'App--dark' : '',
+      withoutPadding ? 'App--noPadding' : '',
+    ]"
+  >
     <transition mode="out-in" name="fade">
-      <router-view />
+      <router-view @remove-padding="removePadding" />
     </transition>
   </div>
 </template>
@@ -17,6 +24,16 @@ export default Vue.extend({
     ...mapGetters(["getDarkMode"]),
     currentRoute() {
       return this.$route.name;
+    },
+  },
+  data() {
+    return {
+      withoutPadding: false,
+    };
+  },
+  methods: {
+    removePadding() {
+      this.withoutPadding = true;
     },
   },
   beforeMount() {
@@ -44,6 +61,11 @@ export default Vue.extend({
       store.commit("setPseudo", stateObject.pseudo);
     }
   },
+  watch: {
+    $route() {
+      this.withoutPadding = false;
+    },
+  },
 });
 </script>
 
@@ -61,6 +83,10 @@ export default Vue.extend({
   &--dark {
     background-color: $darkMode;
     color: $white;
+  }
+
+  &--noPadding {
+    padding: 0;
   }
 }
 </style>
