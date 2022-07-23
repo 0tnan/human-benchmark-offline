@@ -17,6 +17,7 @@ interface Highscore {
   numberMemoryScore: number;
   reactionTimeScore: string;
   verbalMemoryScore: number;
+  aimTrainerScore: string;
 }
 
 enum HighscoreLabels {
@@ -24,6 +25,7 @@ enum HighscoreLabels {
   numberMemoryScore = "numberMemoryScore",
   reactionTimeScore = "reactionTimeScore",
   verbalMemoryScore = "verbalMemoryScore",
+  aimTrainerScore = "aimTrainerScore",
 }
 
 interface HighScorePayload {
@@ -47,6 +49,7 @@ export default new Vuex.Store({
         numberMemoryScore: 0,
         reactionTimeScore: "",
         verbalMemoryScore: 0,
+        aimTrainerScore: "",
       } as Highscore,
       pseudo: UUID,
       dictionary: {},
@@ -76,7 +79,10 @@ export default new Vuex.Store({
       );
     },
     setScore(state: State, payload: HighScorePayload) {
-      if (payload.type != HighscoreLabels.reactionTimeScore) {
+      if (
+        payload.type !== HighscoreLabels.reactionTimeScore &&
+        payload.type !== HighscoreLabels.aimTrainerScore
+      ) {
         if (
           payload.value > state.highscore[payload.type] &&
           typeof payload.value === "number"
@@ -87,7 +93,10 @@ export default new Vuex.Store({
             JSON.stringify(state, replacer)
           );
         }
-      } else if (payload.type === HighscoreLabels.reactionTimeScore) {
+      } else if (
+        payload.type === HighscoreLabels.reactionTimeScore ||
+        payload.type === HighscoreLabels.aimTrainerScore
+      ) {
         if (typeof payload.value === "string") {
           const currentScore = state.highscore[payload.type].replace("ms", "");
           const payloadScore = payload.value.replace("ms", "");

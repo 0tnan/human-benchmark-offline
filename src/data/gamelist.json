@@ -15,6 +15,10 @@
     {
       "name": "Verbal Memory",
       "route": "/verbal-memory"
+    },
+    {
+      "name": "Aim Trainer",
+      "route": "/aim-trainer"
     }
   ]
 }
