@@ -64,6 +64,7 @@ export default Vue.extend({
   watch: {
     $route() {
       this.withoutPadding = false;
+      store.commit("setDictionary", []);
     },
   },
 });

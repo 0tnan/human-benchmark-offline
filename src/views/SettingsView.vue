@@ -17,7 +17,7 @@
         <ul class="Settings-scoreContainer">
           <li
             v-for="(score, label) in getHighscore"
-            :key="score"
+            :key="label"
             class="Settings-scoreItem"
             :class="getDarkMode ? 'Settings-scoreItem--dark' : ''"
           >

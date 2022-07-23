@@ -11,6 +11,10 @@
     {
       "name": "Reaction Time",
       "route": "/reaction-time"
+    },
+    {
+      "name": "Verbal Memory",
+      "route": "/verbal-memory"
     }
   ]
 }
